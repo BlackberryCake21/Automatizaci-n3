@@ -1,0 +1,34 @@
+name: Validar HTML y CSS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Instalar HTML Validator
+        run: npm install -g html-validator-cli
+
+      - name: Validar HTML
+        run: html-validator-cli --file=index.html --format=text
+
+      - name: Instalar CSS Lint
+        run: npm install -g csslint
+
+      - name: Validar CSS
+        run: csslint style.css
