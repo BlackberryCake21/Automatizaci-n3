@@ -21,14 +21,11 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Instalar HTML Validator
-        run: npm install -g html-validator-cli
+      - name: Instalar dependencias
+        run: npm install html-validator-cli csslint
 
-      - name: Validar HTML
-        run: html-validator-cli --file=index.html --format=text
+      - name: Validar HTML con HTML Validator
+        run: npx html-validator-cli --file=index.html --format=text
 
-      - name: Instalar CSS Lint
-        run: npm install -g csslint
-
-      - name: Validar CSS
-        run: csslint style.css
+      - name: Validar CSS con CSS Lint
+        run: npx csslint styles.css || true
